@@ -30,7 +30,7 @@ function grafica(t, x1, x2)
    
     figure(3) 
     disp(norm_diff)
-    plot(norm_diff)
+    plot(t, norm_diff)
     legend(sprintf('norm_diff=%f', norm_diff))  
   elseif colx1==2 && colx2==2 %Ver si estamos en R2
     subplot(2,2,1)
@@ -60,7 +60,7 @@ function grafica(t, x1, x2)
     
     figure(4)
     disp(norm_diff)
-    plot(norm_diff)
+    plot(t, norm_diff)
     legend(sprintf('norm_diff=%f', norm_diff))
     
   elseif colx1==3 && colx2==3
@@ -96,7 +96,7 @@ function grafica(t, x1, x2)
     
     pause(2)
     disp(norm_diff)
-    plot(norm_diff)
+    plot(t, norm_diff)
     legend(sprintf('norm_diff=%f', norm_diff))
   end
 end
