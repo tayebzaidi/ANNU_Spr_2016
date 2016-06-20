@@ -1,10 +1,4 @@
-function [t,x]=rk3(f, intervalo, x0, N)
-
-% La funci�n rk3 resuelve un problema de valor inicial de la forma
-%  x'=f(t,x) en [t0,T]
-%  x(t0)=x0,
-% con x0 en R^n, mediante el m�todo de RungeKutta orden 3
-% 
+function [t,x]=ab5(f, intervalo, x0, N)
 % ENTRADA:
 %  f=@func: funci�n f definida en el fichero func.m
 %  intervalo: [t0,T], donde esta planteado el sistema de ecuaciones
@@ -19,13 +13,21 @@ function [t,x]=rk3(f, intervalo, x0, N)
 h=(intervalo(2)-intervalo(1))/N;
 %t=intervalo(1):h:intervalo(2);
 t=linspace(intervalo(1),intervalo(2),N+1);
-x0=x0(:); % Convertimos x0 en vector columna
 x(:,1)=x0;
-for i=1:N
- F1=feval(f, t(i), x(:,i));
- F2=feval(f,t(i)+h/2, x(:,i)+h/2*F1);
- F3=feval(f,t(i)+3*h/4, x(:,i)+3*h/4*F2);
- x(:,i+1)=x(:,i)+h/9*(2*F1+3*F2+4*F3);
+x0=x0(:); % Convertimos x0 en vector columna
+
+x(:,2)=x(:,1)+h*feval(f,t(1),x(:,1));
+x(:,3)=x(:,2)+h*feval(f,t(2),x(:,2));
+x(:,4)=x(:,3)+h*feval(f,t(3),x(:,3));
+x(:,5)=x(:,4)+h*feval(f,t(4),x(:,4));
+
+for i=1:N-4
+  F0 = feval(f, t(i), x(:,i));
+  F1 = feval(f, t(i+1), x(:,i+1));
+  F2 = feval(f, t(i+2), x(:,i+2));
+  F3 = feval(f, t(i+3), x(:,i+3));
+  F4 = feval(f, t(i+4), x(:,i+4));
+  x(:,i+5)=x(:,i+4)+h/720*(1901*F4-2774*F3 + 2616*F2 - 1274*F1 + 251*F0);
 end
 
 t=t(:);  % Convertimos t en vector columna del tipo (N+1,1)

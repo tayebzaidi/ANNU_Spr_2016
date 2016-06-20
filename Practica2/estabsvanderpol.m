@@ -23,9 +23,9 @@ diff_vec_t1 = diff(t1)
 diff_vec_t2 = diff(t2)
 
 figure(3)
-plot(t1)
+plot(diff_vec_t1)
 
 hold on
-plot(t2)
+plot(diff_vec_t2, color='r')
 
 
